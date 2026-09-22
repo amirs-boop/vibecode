@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIRTOPS x KMA — Выпуклый Маркетинг для Бизнеса</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#07080A',
+                            dark: '#0D0F14',
+                            card: '#141824',
+                            border: '#23293B',
+                            yellow: '#FFDD00',
+                            gold: '#F5B000',
+                            neon: '#CCFF00',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        heading: ['"Syne"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-gradient': 'radial-gradient(circle at 50% 20%, rgba(255, 221, 0, 0.15) 0%, rgba(13, 15, 20, 0) 70%)',
+                        'card-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                        'gold-gradient': 'linear-gradient(90deg, #FFDD00 0%, #F5B000 100%)',
+                    },
+                    boxShadow: {
+                        'glow': '0 0 35px -5px rgba(255, 221, 0, 0.3)',
+                        'glow-lg': '0 0 60px -10px rgba(255, 221, 0, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Custom Scrollbar and Glassmorphism Utility Styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #07080A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #23293B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFDD00;
+        }
+
+        .glass-panel {
+            background: rgba(20, 24, 36, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 221, 0, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(255, 221, 0, 0.15);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(255, 221, 0, 0.5);
+        }
+
+        /* Pulse Animation */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        .animate-pulse-glow {
+            animation: pulseGlow 6s infinite ease-in-out;
+        }
+
+        /* Ticker Animation */
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .animate-ticker {
+            display: flex;
+            width: 200%;
+            animation: ticker 25s linear infinite;
+        }
+        .animate-ticker:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="bg-brand-black text-gray-100 font-sans selection:bg-brand-yellow selection:text-black overflow-x-hidden">
+
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="glass-panel rounded-2xl px-6 py-3.5 flex items-center justify-between border border-white/10">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-brand-yellow flex items-center justify-center font-heading font-extrabold text-black text-xl tracking-tighter group-hover:scale-105 transition-transform">
+                        B
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-heading font-extrabold text-lg sm:text-xl tracking-wider text-white flex items-center gap-1.5">
+                            BIRTOPS <span class="text-xs px-2 py-0.5 rounded-full bg-brand-yellow/20 text-brand-yellow font-sans border border-brand-yellow/30 font-bold">KMA</span>
+                        </span>
+                        <span class="text-[10px] text-gray-400 tracking-widest uppercase">Creative Agency</span>
+                    </div>
+                </a>
+
+                <!-- Nav Links (Desktop) -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300">
+                    <a href="#about" class="hover:text-brand-yellow transition-colors">О нас</a>
+                    <a href="#services" class="hover:text-brand-yellow transition-colors">Услуги</a>
+                    <a href="#calculator" class="hover:text-brand-yellow transition-colors flex items-center gap-1">
+                        Калькулятор <span class="w-2 h-2 rounded-full bg-brand-yellow animate-ping"></span>
+                    </a>
+                    <a href="#cases" class="hover:text-brand-yellow transition-colors">Кейсы</a>
+                    <a href="#faq" class="hover:text-brand-yellow transition-colors">FAQ</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-4">
+                    <button onclick="openModal()" class="relative group hidden sm:inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-bold text-gray-900 rounded-xl group bg-brand-gold-gradient group-hover:from-yellow-400 group-hover:to-yellow-500 hover:text-black focus:ring-4 focus:outline-none focus:ring-yellow-300/30">
+                        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-brand-black rounded-[10px] text-brand-yellow group-hover:bg-opacity-0 group-hover:text-black flex items-center gap-2">
+                            <span>Обсудить проект</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </span>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white p-2">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-x-4 top-20 glass-panel rounded-2xl p-6 border border-white/10 flex-col gap-4 shadow-2xl">
+            <a href="#about" class="mobile-link text-lg font-semibold text-gray-200 py-2 border-b border-gray-800">О нас</a>
+            <a href="#services" class="mobile-link text-lg font-semibold text-gray-200 py-2 border-b border-gray-800">Услуги</a>
+            <a href="#calculator" class="mobile-link text-lg font-semibold text-gray-200 py-2 border-b border-gray-800">Калькулятор стратегии</a>
+            <a href="#cases" class="mobile-link text-lg font-semibold text-gray-200 py-2 border-b border-gray-800">Кейсы и цифры</a>
+            <a href="#faq" class="mobile-link text-lg font-semibold text-gray-200 py-2 border-b border-gray-800">FAQ</a>
+            <button onclick="openModal(); toggleMobileMenu();" class="w-full mt-2 py-3 bg-brand-yellow text-black font-extrabold rounded-xl flex items-center justify-center gap-2">
+                <span>Запросить расчет</span>
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </header>
+
+    <section class="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden bg-hero-gradient">
+        <!-- Animated Background Orbs -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-yellow/10 rounded-full blur-[120px] pointer-events-none animate-pulse-glow"></div>
+        <div class="absolute top-1/3 right-10 w-[300px] h-[300px] bg-brand-gold/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-brand-yellow/30 text-brand-yellow text-xs sm:text-sm font-semibold uppercase tracking-widest mb-8 shadow-glow">
+                <span class="w-2 h-2 rounded-full bg-brand-yellow animate-ping"></span>
+                Член Кыргызской Маркетинговой Ассоциации
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="font-heading font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[1.08] text-white max-w-5xl mx-auto mb-8">
+                ВЫПУКЛЫЙ <span class="bg-clip-text text-transparent bg-brand-gold-gradient underline decoration-brand-yellow/30 decoration-4">КРЕАТИВ</span>, КОТОРЫЙ ОКУПАЕТСЯ
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-gray-400 text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto font-normal leading-relaxed mb-10">
+                Запускаем бренды в самое сердце аудитории. Комплексный маркетинг для предпринимателей 20–40 лет, которые переросли «просто SMM» и требуют <span class="text-white font-semibold">реальных продаж</span>.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-16">
+                <button onclick="openModal()" class="w-full sm:w-auto px-8 py-4 bg-brand-yellow hover:bg-yellow-300 text-black font-extrabold text-lg rounded-xl shadow-glow hover:shadow-glow-lg transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-3 group">
+                    <span>Рассчитать ROI бренда</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+                <a href="#cases" class="w-full sm:w-auto px-8 py-4 glass-card hover:bg-white/10 text-white font-bold text-lg rounded-xl transition-all border border-white/15 flex items-center justify-center gap-2">
+                    <i data-lucide="play-circle" class="w-5 h-5 text-brand-yellow"></i>
+                    <span>Кейсы в цифрах</span>
+                </a>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto">
+                <div class="glass-panel p-6 rounded-2xl text-center border-t-2 border-t-brand-yellow/50">
+                    <div class="font-heading font-extrabold text-3xl sm:text-4xl text-white mb-1">x3.8</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium">Средний рост ROI клиентов</div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl text-center border-t-2 border-t-brand-yellow/50">
+                    <div class="font-heading font-extrabold text-3xl sm:text-4xl text-brand-yellow mb-1">150+</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium">Запущенных проектов</div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl text-center border-t-2 border-t-brand-yellow/50">
+                    <div class="font-heading font-extrabold text-3xl sm:text-4xl text-white mb-1">98.4%</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium">Окупаемость рекламных кампаний</div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl text-center border-t-2 border-t-brand-yellow/50">
+                    <div class="font-heading font-extrabold text-3xl sm:text-4xl text-brand-yellow mb-1">&gt; $2.5M</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium">Освоенный рекламный бюджет</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="w-full bg-brand-yellow py-3 overflow-hidden font-heading font-extrabold text-black uppercase tracking-wider text-sm sm:text-base border-y border-yellow-300">
+        <div class="animate-ticker whitespace-nowrap">
+            <span class="mx-6 flex items-center gap-3"><i data-lucide="zap" class="w-4 h-4"></i> СМЕЛЫЙ МАРКЕТИНГ</span>
+            <span class="mx-6 flex items-center gap-3"><i data-lucide="sparkles" class="w-4 h-4"></i> BIRTOPS CREATIVE</span>
+            <span class="mx-6 flex items-center gap-3"><i data-lucide="trending-up" class="w-4 h-4"></i> КМA СТАНДАРТЫ КАЧЕСТВА</span>
+            <span class="mx-6 flex items-center gap-3"><i data-lucide="target" class="w-4 h-4"></i> ТОЧНЫЙ ТАРГЕТИРОВАНИЕ</span>
+            <span class="mx-6 flex items-center gap-3"><i data-lucide="zap" class="w-4 h-4"></i> СМЕЛЫЙ МАРКЕТИНГ</span>
+            <span class="mx-6 flex items-center gap-3"><i data-lucide="sparkles" class="w-4 h-4"></i> BIRTOPS CREATIVE</span>
+            <span class="mx-6 flex items-center gap-3"><i data-lucide="trending-up" class="w-4 h-4"></i> КМA СТАНДАРТЫ КАЧЕСТВА</span>
+            <span class="mx-6 flex items-center gap-3"><i data-lucide="target" class="w-4 h-4"></i> ТОЧНЫЙ ТАРГЕТИРОВАНИЕ</span>
+        </div>
+    </div>
+
+    <section id="about" class="py-24 relative z-10 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="inline-flex items-center gap-2 text-brand-yellow text-sm font-bold uppercase tracking-widest">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i> ДНК Нашего Агентства
+                    </div>
+                    <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white leading-tight">
+                        Мы не делаем «красивенько». Мы делаем <span class="text-brand-yellow">прибыльно</span>.
+                    </h2>
+                    <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
+                        Большинство агентств продают подписчиков и красивую сеточку в Instagram. Мы в **BIRTOPS x KMA** продаём систему, которая приносит твердую выручку и строит сильный бренд на рынке Кыргызстана и СНГ.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="glass-card p-5 rounded-2xl">
+                            <div class="w-10 h-10 rounded-xl bg-brand-yellow/10 text-brand-yellow flex items-center justify-center mb-3">
+                                <i data-lucide="flame" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-bold text-white text-lg mb-1">Выпуклый Креатив</h3>
+                            <p class="text-gray-400 text-sm">Пробиваем баннерную слепоту аудитории вирусными концептами.</p>
+                        </div>
+                        <div class="glass-card p-5 rounded-2xl">
+                            <div class="w-10 h-10 rounded-xl bg-brand-yellow/10 text-brand-yellow flex items-center justify-center mb-3">
+                                <i data-lucide="line-chart" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-bold text-white text-lg mb-1">Сквозная Аналитика</h3>
+                            <p class="text-gray-400 text-sm">Считаем стоимость каждого лида, продажи и LTV Ваших клиентов.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 relative">
+                    <div class="relative rounded-3xl overflow-hidden glass-panel p-2 border border-white/10 shadow-2xl">
+                        <div class="bg-brand-black p-8 rounded-2xl space-y-6">
+                            <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                                <span class="text-sm text-gray-400">Стандарты КМА</span>
+                                <span class="text-xs px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">Сертифицировано</span>
+                            </div>
+                            
+                            <!-- Key principles list -->
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-brand-yellow/20 text-brand-yellow flex items-center justify-center shrink-0 font-bold">1</div>
+                                    <div>
+                                        <h4 class="text-white font-bold">Фокус на предпринимателя 20-40 лет</h4>
+                                        <p class="text-gray-400 text-sm">Говорим с вами на одном языке цифр, маржинальности и масштабирования.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-brand-yellow/20 text-brand-yellow flex items-center justify-center shrink-0 font-bold">2</div>
+                                    <div>
+                                        <h4 class="text-white font-bold">Собственная Продакшн-студия</h4>
+                                        <p class="text-gray-400 text-sm">Съёмки Reels/TikTok высокого качества: от сценария до цветокоррекции.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-brand-yellow/20 text-brand-yellow flex items-center justify-center shrink-0 font-bold">3</div>
+                                    <div>
+                                        <h4 class="text-white font-bold">Гипер-целевой таргетинг</h4>
+                                        <p class="text-gray-400 text-sm">Оптимизация рекламных кабинетов Meta, TikTok и Google по конверсиям.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-gray-700 overflow-hidden">
+                                        <img src="https://placehold.co/100x100/23293B/FFDD00?text=CEO" alt="CEO Birtops" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <div class="text-white font-bold text-sm">Команда BIRTOPS</div>
+                                        <div class="text-xs text-gray-400">Маркетологи & Креаторы</div>
+                                    </div>
+                                </div>
+                                <i data-lucide="award" class="w-8 h-8 text-brand-yellow"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 text-brand-yellow text-sm font-bold uppercase tracking-widest mb-3">
+                    <i data-lucide="layers" class="w-4 h-4"></i> Направления Работы
+                </div>
+                <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white">
+                    Услуги, затаченные на <span class="text-brand-yellow">результат</span>
+                </h2>
+                <p class="text-gray-400 mt-4 text-base sm:text-lg"> Выберите отдельную услугу или закажите комплексную стратегию захвата рынка. </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Service 1 -->
+                <div class="glass-card p-8 rounded-3xl relative group transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-brand-yellow/10 text-brand-yellow flex items-center justify-center mb-6 text-2xl group-hover:scale-110 transition-transform">
+                            <i data-lucide="video" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-white mb-3">Выпуклый Продакшн & Reels</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Создаем вирусный контент, который пробивает ленту. Разработка сценариев, съёмка 4K, топовый монтаж и актеры.
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-yellow"></i> До 15 Reels/TikTok в месяц</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-yellow"></i> Профессиональный свет и звук</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-yellow"></i> Лид-магнитные сценарии</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModalWithService('Продакшн & Reels')" class="w-full py-3 rounded-xl bg-white/5 hover:bg-brand-yellow hover:text-black text-white font-bold transition-colors flex items-center justify-center gap-2">
+                        Заказать продакшн <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Service 2 (Featured) -->
+                <div class="glass-card p-8 rounded-3xl relative group transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between border-2 border-brand-yellow/50 shadow-glow">
+                    <div class="absolute -top-4 right-6 bg-brand-yellow text-black text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                        Хит продаж
+                    </div>
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-brand-yellow text-black flex items-center justify-center mb-6 text-2xl group-hover:scale-110 transition-transform">
+                            <i data-lucide="target" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-white mb-3">Комплексный Таргетинг</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Настройка рекламы в Meta (Instagram/Facebook) и TikTok Ads с фиксацией стоимости за целевую заявку (CPL).
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-yellow"></i> Анализ связок и офферов</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-yellow"></i> Настройка Pixel и Conversions API</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-yellow"></i> Еженедельные отчеты по ROI</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModalWithService('Комплексный Таргетинг')" class="w-full py-3 rounded-xl bg-brand-yellow text-black font-extrabold hover:bg-yellow-300 transition-colors flex items-center justify-center gap-2">
+                        Запустить таргетинг <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-card p-8 rounded-3xl relative group transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-brand-yellow/10 text-brand-yellow flex items-center justify-center mb-6 text-2xl group-hover:scale-110 transition-transform">
+                            <i data-lucide="compass" class="w-4 h-4"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-white mb-3">Бренд-Стратегия "360°"</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Перестройка позиционирования для бизнеса. Разработка УТП, фирменного стиля, сайта и воронки продаж.
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-yellow"></i> Исследование конкурентов и ЦА</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-yellow"></i> Гайдлайн и книга бренда</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-yellow"></i> Воронка конверсии в WhatsApp/CRM</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModalWithService('Бренд-Стратегия 360')" class="w-full py-3 rounded-xl bg-white/5 hover:bg-brand-yellow hover:text-black text-white font-bold transition-colors flex items-center justify-center gap-2">
+                        Разработать стратегию <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator" class="py-24 relative z-10 bg-brand-dark">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-brand-yellow/30 relative overflow-hidden">
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-brand-yellow/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="px-3 py-1 rounded-full bg-brand-yellow/20 text-brand-yellow text-xs font-bold uppercase tracking-wider">
+                        Интерактивный Расчет
+                    </span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white mt-3">
+                        Рассчитайте необходимый маркетинговый стек
+                    </h2>
+                    <p class="text-gray-400 text-sm mt-2"> Выберите параметры вашего бизнеса, чтобы получить персональную рекомендацию и примерный бюджет. </p>
+                </div>
+
+                <form id="calc-form" onsubmit="handleCalcSubmit(event)" class="space-y-8">
+                    <!-- Step 1: Niche -->
+                    <div>
+                        <label class="block text-white font-bold mb-3 text-sm uppercase tracking-wider">1. Ваша ниша бизнеса:</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="niche" value="HoReCa / Рестораны" class="peer hidden" checked>
+                                <div class="glass-card p-3 rounded-xl text-center text-sm font-semibold text-gray-300 peer-checked:bg-brand-yellow peer-checked:text-black peer-checked:font-bold transition-all border border-white/5">
+                                    HoReCa / Общепит
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="niche" value="Строительство / Недвижимость" class="peer hidden">
+                                <div class="glass-card p-3 rounded-xl text-center text-sm font-semibold text-gray-300 peer-checked:bg-brand-yellow peer-checked:text-black peer-checked:font-bold transition-all border border-white/5">
+                                    Недвижимость
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="niche" value="E-commerce / Ритейл" class="peer hidden">
+                                <div class="glass-card p-3 rounded-xl text-center text-sm font-semibold text-gray-300 peer-checked:bg-brand-yellow peer-checked:text-black peer-checked:font-bold transition-all border border-white/5">
+                                    E-commerce / Магазин
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="niche" value="Услуги / B2B" class="peer hidden">
+                                <div class="glass-card p-3 rounded-xl text-center text-sm font-semibold text-gray-300 peer-checked:bg-brand-yellow peer-checked:text-black peer-checked:font-bold transition-all border border-white/5">
+                                    Услуги / B2B
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Goal -->
+                    <div>
+                        <label class="block text-white font-bold mb-3 text-sm uppercase tracking-wider">2. Главная цель на 3 месяца:</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="goal" value="Быстрый поток заявок" class="peer hidden" checked>
+                                <div class="glass-card p-4 rounded-xl text-gray-300 peer-checked:bg-brand-yellow/10 peer-checked:border-brand-yellow peer-checked:text-white transition-all border border-white/5">
+                                    <div class="font-bold text-white mb-1">Быстрый поток заявок</div>
+                                    <div class="text-xs text-gray-400">Нужны клиенты прямо сейчас</div>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="goal" value="Узнаваемость и имидж" class="peer hidden">
+                                <div class="glass-card p-4 rounded-xl text-gray-300 peer-checked:bg-brand-yellow/10 peer-checked:border-brand-yellow peer-checked:text-white transition-all border border-white/5">
+                                    <div class="font-bold text-white mb-1">Узнаваемость бренда</div>
+                                    <div class="text-xs text-gray-400">Захват доли рынка в регионe</div>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="goal" value="Комплексный перезапуск" class="peer hidden">
+                                <div class="glass-card p-4 rounded-xl text-gray-300 peer-checked:bg-brand-yellow/10 peer-checked:border-brand-yellow peer-checked:text-white transition-all border border-white/5">
+                                    <div class="font-bold text-white mb-1">Перезапуск бизнеса</div>
+                                    <div class="text-xs text-gray-400">Полный ребрендинг и воронка</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Budget Range -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-white font-bold text-sm uppercase tracking-wider">3. Планируемый рекламный бюджет в месяц:</label>
+                            <span id="budget-value" class="text-brand-yellow font-heading font-bold text-xl">$1,000 - $2,500</span>
+                        </div>
+                        <input type="range" min="500" max="10000" step="500" value="2000" id="budget-slider" oninput="updateBudgetVal(this.value)" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-brand-yellow">
+                        <div class="flex justify-between text-xs text-gray-400 mt-2">
+                            <span>$500</span>
+                            <span>$2,500</span>
+                            <span>$5,000</span>
+                            <span>$10,000+</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Calc -->
+                    <div class="pt-4 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="text-sm text-gray-400">
+                            *Расчёт включает подготовку креативов и ведение кампаний.
+                        </div>
+                        <button type="submit" class="w-full sm:w-auto px-8 py-4 bg-brand-yellow hover:bg-yellow-300 text-black font-extrabold rounded-xl transition-all shadow-glow flex items-center justify-center gap-2">
+                            <span>Получить коммерческое предложение</span>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="cases" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                <div>
+                    <div class="inline-flex items-center gap-2 text-brand-yellow text-sm font-bold uppercase tracking-widest mb-3">
+                        <i data-lucide="trophy" class="w-4 h-4"></i> Результаты в Цифрах
+                    </div>
+                    <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white">
+                        Наши твердые <span class="text-brand-yellow">кейсы</span>
+                    </h2>
+                </div>
+                <p class="text-gray-400 max-w-md mt-4 md:mt-0 text-sm"> Реальные показатели клиентов после внедрения выпуклого креатива BIRTOPS. </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Case 1 -->
+                <div class="glass-card rounded-3xl overflow-hidden group">
+                    <div class="h-48 bg-gradient-to-br from-yellow-500/20 to-purple-900/40 p-6 flex flex-col justify-between relative">
+                        <span class="px-3 py-1 rounded-full bg-black/50 text-white text-xs font-semibold backdrop-blur-md w-fit">Ресторанная сеть</span>
+                        <h3 class="font-heading font-extrabold text-2xl text-white">Сеть заведений в Бишкеке</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="grid grid-cols-2 gap-4 border-b border-gray-800 pb-4">
+                            <div>
+                                <div class="text-xs text-gray-400">Рост броней</div>
+                                <div class="font-heading font-bold text-2xl text-brand-yellow">+210%</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400">Охват Reels</div>
+                                <div class="font-heading font-bold text-2xl text-white">1.8M</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-sm"> Разработали фуд-контент с трендовым монтажом и запустили гео-таргетинг на аудиторию 22-45 лет. </p>
+                    </div>
+                </div>
+
+                <!-- Case 2 -->
+                <div class="glass-card rounded-3xl overflow-hidden group">
+                    <div class="h-48 bg-gradient-to-br from-blue-600/20 to-brand-yellow/20 p-6 flex flex-col justify-between relative">
+                        <span class="px-3 py-1 rounded-full bg-black/50 text-white text-xs font-semibold backdrop-blur-md w-fit">Премиум Застройщик</span>
+                        <h3 class="font-heading font-extrabold text-2xl text-white">Жилой Комплекс бизнес-класса</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="grid grid-cols-2 gap-4 border-b border-gray-800 pb-4">
+                            <div>
+                                <div class="text-xs text-gray-400">Лидов получено</div>
+                                <div class="font-heading font-bold text-2xl text-brand-yellow">430+</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400">Цена целевого лида</div>
+                                <div class="font-heading font-bold text-2xl text-white">$14.2</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-sm"> Упаковали смыслы в 3D-презентации и настроили Meta Conversions API для фильтрации нецелевых звонков. </p>
+                    </div>
+                </div>
+
+                <!-- Case 3 -->
+                <div class="glass-card rounded-3xl overflow-hidden group">
+                    <div class="h-48 bg-gradient-to-br from-emerald-500/20 to-brand-dark p-6 flex flex-col justify-between relative">
+                        <span class="px-3 py-1 rounded-full bg-black/50 text-white text-xs font-semibold backdrop-blur-md w-fit">E-Commerce Бренд</span>
+                        <h3 class="font-heading font-extrabold text-2xl text-white">Бренд Одежды СНГ</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="grid grid-cols-2 gap-4 border-b border-gray-800 pb-4">
+                            <div>
+                                <div class="text-xs text-gray-400">Выручка за месяц</div>
+                                <div class="font-heading font-bold text-2xl text-brand-yellow">$85,000</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400">ROAS</div>
+                                <div class="font-heading font-bold text-2xl text-white">540%</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-sm"> Переработали воронку в соцсетях и внедрили динамический ретаргетинг каталога товаров. </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-24 relative z-10 bg-brand-dark">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 text-brand-yellow text-sm font-bold uppercase tracking-widest mb-3">
+                    <i data-lucide="help-circle" class="w-4 h-4"></i> Ответы на вопросы
+                </div>
+                <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white">
+                    Часто задаваемые вопросы
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- FAQ Item 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center text-white font-bold text-lg hover:text-brand-yellow transition-colors">
+                        <span>Как быстро мы увидим первые результаты?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-brand-yellow transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-6 text-gray-400 text-sm leading-relaxed">
+                        Первые целевые заявки вы получаете уже в первые 3-5 дней после запуска рекламных кампаний. Первый месяц уходит на тестирование 10+ гипотез и выявление самой прибыльной связки.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center text-white font-bold text-lg hover:text-brand-yellow transition-colors">
+                        <span>Чем вы отличаетесь от фрилансеров или обычных SMM-агентств?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-brand-yellow transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-6 text-gray-400 text-sm leading-relaxed">
+                        Мы являемся участниками КМА и работаем по стандартам системного маркетинга. Мы не просто "публикуем посты", а строим сквозную аналитику, снимаем профессиональный видеоконтент и оптимизируем воронку продаж под финансовые показатели вашего бизнеса.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center text-white font-bold text-lg hover:text-brand-yellow transition-colors">
+                        <span>Какой минимальный бюджет нужен для старта?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-brand-yellow transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-6 text-gray-400 text-sm leading-relaxed">
+                        Рекомендуемый рекламный бюджет для рынка Бишкека — от $500 в месяц. Услуги агентства рассчитываются индивидуально в зависимости от выбранного пакета (Продакшн, Таргет или Комплекс 360).
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center text-white font-bold text-lg hover:text-brand-yellow transition-colors">
+                        <span>Заключаем ли мы официальный договор?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-brand-yellow transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-6 text-gray-400 text-sm leading-relaxed">
+                        Да, работаем строго по договору с ИП/ОсОО, предоставим закрывающие документы и KPI-метрики, прописанные в соглашении.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-form" class="py-24 relative z-10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel p-8 sm:p-14 rounded-3xl border-2 border-brand-yellow/40 relative overflow-hidden shadow-glow-lg">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    
+                    <div class="lg:col-span-5 space-y-6">
+                        <span class="px-3 py-1 rounded-full bg-brand-yellow text-black text-xs font-extrabold uppercase">
+                            Закроем план по продажам
+                        </span>
+                        <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">
+                            Готовы включить <span class="text-brand-yellow">выпуклый маркетинг</span>?
+                        </h2>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Оставьте заявку. Мы проведем экспресс-аудит ваших соцсетей и рекламы и покажем точки роста в течение 24 часов.
+                        </p>
+
+                        <div class="space-y-3 pt-2">
+                            <div class="flex items-center gap-3 text-sm text-gray-300">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-brand-yellow"></i>
+                                <span>Бесплатный разбор вашей воронки</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-gray-300">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-brand-yellow"></i>
+                                <span>Расчет стоимости заявки (CPL)</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-gray-300">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-brand-yellow"></i>
+                                <span>Конфиденциальность данных</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Form -->
+                    <div class="lg:col-span-7 bg-brand-black p-6 sm:p-8 rounded-2xl border border-white/10">
+                        <form onsubmit="handleMainFormSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs text-gray-400 font-bold uppercase mb-1">Ваше Имя</label>
+                                <input type="text" required placeholder="Алмаз Ибраев" class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-yellow transition-colors">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs text-gray-400 font-bold uppercase mb-1">Телефон / WhatsApp</label>
+                                <input type="tel" required placeholder="+996 (___) __-__-__" class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-yellow transition-colors">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs text-gray-400 font-bold uppercase mb-1">Ниша бизнеса</label>
+                                    <input type="text" placeholder="Например: Ресторан / Ретейл" class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-yellow transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-400 font-bold uppercase mb-1">Бюджет в месяц</label>
+                                    <select class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-yellow transition-colors">
+                                        <option>$500 - $1,000</option>
+                                        <option selected>$1,000 - $3,000</option>
+                                        <option>$3,000 - $5,000</option>
+                                        <option>$5,000+</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 bg-brand-yellow hover:bg-yellow-300 text-black font-extrabold text-lg rounded-xl shadow-glow transition-all flex items-center justify-center gap-2 mt-2">
+                                <span>Получить маркетинговую стратегию</span>
+                                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-brand-black border-t border-gray-800 pt-16 pb-12 relative z-10 text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                
+                <div class="space-y-4 md:col-span-1">
+                    <a href="#" class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-brand-yellow flex items-center justify-center font-heading font-extrabold text-black text-lg">
+                            B
+                        </div>
+                        <span class="font-heading font-extrabold text-xl text-white">BIRTOPS x KMA</span>
+                    </a>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Маркетинговое агентство выпуклого креатива и системного роста для лидеров рынка.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Навигация</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="hover:text-brand-yellow transition-colors">О нас</a></li>
+                        <li><a href="#services" class="hover:text-brand-yellow transition-colors">Услуги</a></li>
+                        <li><a href="#calculator" class="hover:text-brand-yellow transition-colors">Калькулятор</a></li>
+                        <li><a href="#cases" class="hover:text-brand-yellow transition-colors">Кейсы</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Контакты</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-brand-yellow"></i> г. Бишкек, Кыргызстан</li>
+                        <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-brand-yellow"></i> +996 (555) 00-11-22</li>
+                        <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-brand-yellow"></i> hello@birtops.kg</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Сообщество</h4>
+                    <p class="text-xs text-gray-400 mb-4">Официальный член Кыргызской Маркетинговой Ассоциации (КМА)</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-white hover:text-brand-yellow transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-white hover:text-brand-yellow transition-colors">
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-white hover:text-brand-yellow transition-colors">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-gray-900 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+                <div>&copy; 2026 BIRTOPS Creative Agency & KMA. Все права защищены.</div>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-gray-400">Политика конфиденциальности</a>
+                    <a href="#" class="hover:text-gray-400">Публичная оферта</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel p-6 sm:p-8 rounded-3xl max-w-lg w-full border border-brand-yellow/40 relative animate-in fade-in zoom-in duration-200">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+
+            <div id="modal-content">
+                <span class="px-3 py-1 rounded-full bg-brand-yellow/20 text-brand-yellow text-xs font-bold uppercase tracking-wider">
+                    Экспресс-Консультация
+                </span>
+                <h3 id="modal-title" class="font-heading text-2xl font-extrabold text-white mt-3 mb-2">Обсудить проект с BIRTOPS</h3>
+                <p class="text-gray-400 text-sm mb-6">Заполните форму, и главный стратег свяжется с вами в течение 15 минут.</p>
+
+                <form onsubmit="handleModalSubmit(event)" class="space-y-4">
+                    <input type="hidden" id="modal-selected-service" value="Общая консультация">
+
+                    <div>
+                        <label class="block text-xs text-gray-400 font-bold uppercase mb-1">Имя</label>
+                        <input type="text" required placeholder="Ваше имя" class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-yellow">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-gray-400 font-bold uppercase mb-1">Номер Телефон / WhatsApp</label>
+                        <input type="tel" required placeholder="+996 (___) __-__-__" class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-yellow">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-gray-400 font-bold uppercase mb-1">Комментарий / Ссылка на Инстаграм</label>
+                        <textarea rows="2" placeholder="Расскажите кратко о вашем бизнесе" class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-yellow"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-brand-yellow hover:bg-yellow-300 text-black font-extrabold text-base rounded-xl shadow-glow transition-all flex items-center justify-center gap-2">
+                        <span>Отправить форму</span>
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Success Notification State inside Modal -->
+            <div id="modal-success" class="hidden text-center py-8 space-y-4">
+                <div class="w-16 h-16 rounded-full bg-brand-yellow/20 text-brand-yellow flex items-center justify-center mx-auto">
+                    <i data-lucide="check" class="w-8 h-8"></i>
+                </div>
+                <h3 class="font-heading text-2xl font-bold text-white">Заявка принята!</h3>
+                <p class="text-gray-300 text-sm">Наш маркетолог уже изучает ваш проект и напишет вам в WhatsApp.</p>
+                <button onclick="closeModal()" class="px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold text-sm transition-colors">
+                    Закрыть окно
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Header Background Blur on Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('py-4');
+            } else {
+                header.classList.add('py-4');
+                header.classList.remove('py-2');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        }
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+
+        // Modal Logic
+        function openModal() {
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('modal-content').classList.remove('hidden');
+            document.getElementById('modal-success').classList.add('hidden');
+            document.getElementById('modal-title').innerText = 'Обсудить проект с BIRTOPS';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openModalWithService(serviceName) {
+            openModal();
+            document.getElementById('modal-title').innerText = 'Заказать: ' + serviceName;
+            document.getElementById('modal-selected-service').value = serviceName;
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // FAQ Toggle Logic
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Budget Slider Update
+        function updateBudgetVal(val) {
+            const budgetText = document.getElementById('budget-value');
+            if (val < 1000) {
+                budgetText.innerText = '$500 - $1,000';
+            } else if (val <= 3000) {
+                budgetText.innerText = '$1,000 - $3,000';
+            } else if (val <= 6000) {
+                budgetText.innerText = '$3,000 - $6,000';
+            } else {
+                budgetText.innerText = '$6,000+ / Индивидуально';
+            }
+        }
+
+        // Form Handlers
+        function handleModalSubmit(e) {
+            e.preventDefault();
+            document.getElementById('modal-content').classList.add('hidden');
+            document.getElementById('modal-success').classList.remove('hidden');
+        }
+
+        function handleMainFormSubmit(e) {
+            e.preventDefault();
+            openModal();
+            document.getElementById('modal-content').classList.add('hidden');
+            document.getElementById('modal-success').classList.remove('hidden');
+        }
+
+        function handleCalcSubmit(e) {
+            e.preventDefault();
+            openModal();
+            document.getElementById('modal-title').innerText = 'Заявка с калькулятора';
+            document.getElementById('modal-content').classList.remove('hidden');
+            document.getElementById('modal-success').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
